@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/"
+baseURL = "http://gem-io.com/"
 title = "gem-io | Beyond pixels lies truth"
 theme = "PaperMod"
 timeZone = "Asia/Shanghai"
