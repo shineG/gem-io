@@ -1,0 +1,112 @@
+{{- define "main" }}
+
+<main class="gallery-main">
+
+  <div class="container-1200">
+
+    <div class="gallery-masonry">
+
+      {{- $galleryPages := where site.RegularPages "Section" "gallery" }}
+      {{- $galleryPages = $galleryPages.ByDate.Reverse }}
+
+
+      {{- range $galleryPages }}
+
+        {{- $page := . }}
+
+        {{- with $page.Params.cover.image }}
+
+          {{- $coverName := . }}
+
+          {{- with $page.Resources.ByType "image" }}
+
+            {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+              {{- $image := . }}
+              {{- $exif := $image.Exif }}
+
+              <article class="gallery-item">
+
+                <button
+                  type="button"
+                  class="gallery-item-button"
+
+                  data-gallery-image="{{ $image.RelPermalink }}"
+
+                  data-gallery-title="{{ $page.Title }}"
+
+                  data-gallery-description="{{ $page.Description }}"
+
+                  {{- with $exif }}
+
+                    {{- with .Tags.DateTimeOriginal }}
+                    data-gallery-shooting-time="{{ . }}"
+                    {{- end }}
+
+                    {{- with .Tags.Make }}
+                    data-gallery-camera-make="{{ . }}"
+                    {{- end }}
+
+                    {{- with .Tags.Model }}
+                    data-gallery-camera-model="{{ . }}"
+                    {{- end }}
+
+                    {{- with .Tags.LensModel }}
+                    data-gallery-lens="{{ . }}"
+                    {{- end }}
+
+                    {{- with .Tags.FocalLength }}
+                    data-gallery-focal-length="{{ . }}"
+                    {{- end }}
+
+                    {{- with .Tags.FNumber }}
+                    data-gallery-aperture="{{ . }}"
+                    {{- end }}
+
+                    {{- with .Tags.ExposureTime }}
+                    data-gallery-shutter-speed="{{ . }}"
+                    {{- end }}
+
+                    {{- with .Tags.ISOSpeedRatings }}
+                    data-gallery-iso="{{ . }}"
+                    {{- end }}
+
+                  {{- end }}
+
+                  aria-label="查看：{{ $page.Title }}"
+                >
+
+                  <img
+                    src="{{ $image.RelPermalink }}"
+                    alt="{{ $page.Params.cover.alt | default $page.Title }}"
+                  >
+
+                </button>
+
+              </article>
+
+            {{- end }}
+
+          {{- end }}
+
+        {{- end }}
+
+      {{- end }}
+
+    </div>
+
+  </div>
+
+</main>
+
+
+{{- $galleryJS := resources.Get "js/gallery-viewer.js" | minify | fingerprint }}
+
+<script
+  defer
+  src="{{ $galleryJS.RelPermalink }}"
+  integrity="{{ $galleryJS.Data.Integrity }}"
+  crossorigin="anonymous"
+></script>
+
+{{- end }}

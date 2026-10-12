@@ -1,0 +1,535 @@
+{{- define "main" }}
+
+<div class="home-page">
+
+  <!-- =====================================================
+       Header
+       ===================================================== -->
+
+    <header class="header container-1200">
+         <nav class="nav">
+
+      <div class="logo">
+
+        <a href="/"
+          accesskey="h"
+          title="gem-io | Beyond pixels lies truth (Alt + H)">
+          gem-io | Beyond pixels lies truth
+        </a>
+
+        <span class="logo-switches">
+
+          {{- if (not site.Params.disableThemeToggle) }}
+
+          <button
+            id="theme-toggle"
+            accesskey="t"
+            title="(Alt + T)"
+            aria-label="Toggle theme">
+
+            <svg id="moon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3
+                       7 7 0 0 0 21 12.79z">
+              </path>
+            </svg>
+
+            <svg id="sun"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+
+          </button>
+
+          {{- end }}
+
+        </span>
+
+      </div>
+
+      <ul id="menu">
+        <li>
+          <a href="/about/">
+            <span>ABOUT</span>
+          </a>
+        </li>
+      </ul>
+
+    </nav>
+  </header>
+
+
+  <!-- =====================================================
+       Main Homepage Area
+       ===================================================== -->
+
+  <main class="home-main">
+
+    <div class="container-1200 home-grid">
+
+
+      <!-- =================================================
+           Recent Updates
+           自动按文章日期倒序
+           ================================================= -->
+
+      <section class="home-recent">
+
+        <h2>最近动态</h2>
+
+        {{- $recentPosts := where site.RegularPages "Section" "posts" }}
+        {{- $recentPosts = $recentPosts.ByDate.Reverse }}
+
+        {{- range first 5 $recentPosts }}
+
+          {{- $page := . }}
+
+          <article class="recent-item">
+
+            <a href="{{ $page.RelPermalink }}">
+
+              {{- with $page.Params.cover.image }}
+                {{- $coverName := . }}
+
+                {{- with $page.Resources.ByType "image" }}
+                  {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+                    <img
+                      class="recent-thumb recent-thumb-aligned"
+                      src="{{ .RelPermalink }}"
+                      alt="{{ $page.Params.cover.alt | default $page.Title }}">
+
+                  {{- end }}
+                {{- end }}
+
+              {{- end }}
+
+              <div class="recent-info">
+
+                {{- with $page.Params.tags }}
+                  <div class="recent-tag">
+                    {{ index . 0 }}
+                  </div>
+                {{- end }}
+
+                <h3 class="recent-title">
+                  {{ $page.Title }}
+                </h3>
+
+                {{- with $page.Description }}
+                  <p class="recent-description">
+                    {{ . }}
+                  </p>
+                {{- end }}
+
+              </div>
+
+            </a>
+
+          </article>
+
+        {{- end }}
+
+        <div class="recent-more">
+          <a href="/posts/">
+            查看更多
+          </a>
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           Main Focus
+           ================================================= -->
+
+      <section class="home-focus">
+
+        {{- $mainFocus := false }}
+
+        {{- range site.RegularPages }}
+
+          {{- $page := . }}
+
+          {{- range $page.Params.homepage }}
+
+            {{- if eq .position "main" }}
+              {{- $mainFocus = $page }}
+            {{- end }}
+
+          {{- end }}
+
+        {{- end }}
+
+
+        {{- with $mainFocus }}
+
+          {{- $page := . }}
+
+          <article class="main-focus">
+
+            <a
+              class="main-focus-link"
+              href="{{ $page.RelPermalink }}"
+            >
+
+              <div class="main-focus-image-wrap">
+
+                {{- with $page.Params.cover.image }}
+                  {{- $coverName := . }}
+
+                  {{- with $page.Resources.ByType "image" }}
+                    {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+                      <img
+                        class="main-focus-image"
+                        src="{{ .RelPermalink }}"
+                        alt="{{ $page.Params.cover.alt | default $page.Title }}"
+                      >
+
+                    {{- end }}
+                  {{- end }}
+
+                {{- end }}
+
+                <div class="main-focus-overlay">
+
+                  {{- with $page.Params.tags }}
+                    <div class="main-focus-tag">
+                      {{ index . 0 }}
+                    </div>
+                  {{- end }}
+
+                  <h2 class="main-focus-title">
+                    {{ $page.Title }}
+                  </h2>
+
+                  {{- with $page.Description }}
+                    <p class="main-focus-description">
+                      {{ . }}
+                    </p>
+                  {{- end }}
+
+                </div>
+
+              </div>
+
+            </a>
+
+          </article>
+
+        {{- end }}
+
+
+        <!-- =============================================
+             Secondary Cards
+             priority 0 → 左
+             priority 1 → 右
+             ============================================= -->
+
+        {{- $secondary0 := false }}
+        {{- $secondary1 := false }}
+
+        {{- range site.RegularPages }}
+
+          {{- $page := . }}
+
+          {{- range $page.Params.homepage }}
+
+            {{- if and
+              (eq .position "secondary")
+              (eq .priority 0)
+            }}
+
+              {{- $secondary0 = $page }}
+
+            {{- end }}
+
+
+            {{- if and
+              (eq .position "secondary")
+              (eq .priority 1)
+            }}
+
+              {{- $secondary1 = $page }}
+
+            {{- end }}
+
+          {{- end }}
+
+        {{- end }}
+
+
+        <div class="home-secondary-grid">
+
+
+          <!-- =========================================
+               Secondary 0
+               ========================================= -->
+
+          {{- with $secondary0 }}
+
+            {{- $page := . }}
+
+            <article class="secondary-card">
+
+              <a href="{{ $page.RelPermalink }}">
+
+                {{- with $page.Params.cover.image }}
+                  {{- $coverName := . }}
+
+                  {{- with $page.Resources.ByType "image" }}
+                    {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+                      <img
+                        class="secondary-image ratio-5-4"
+                        src="{{ .RelPermalink }}"
+                        alt="{{ $page.Params.cover.alt | default $page.Title }}">
+
+                    {{- end }}
+                  {{- end }}
+
+                {{- end }}
+
+                <h3>
+                  {{ $page.Title }}
+                </h3>
+
+              </a>
+
+            </article>
+
+          {{- end }}
+
+
+          <!-- =========================================
+               Secondary 1
+               ========================================= -->
+
+          {{- with $secondary1 }}
+
+            {{- $page := . }}
+
+            <article class="secondary-card">
+
+              <a href="{{ $page.RelPermalink }}">
+
+                {{- with $page.Params.cover.image }}
+                  {{- $coverName := . }}
+
+                  {{- with $page.Resources.ByType "image" }}
+                    {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+                      <img
+                        class="secondary-image ratio-5-4"
+                        src="{{ .RelPermalink }}"
+                        alt="{{ $page.Params.cover.alt | default $page.Title }}">
+
+                    {{- end }}
+                  {{- end }}
+
+                {{- end }}
+
+                <h3>
+                  {{ $page.Title }}
+                </h3>
+
+              </a>
+
+            </article>
+
+          {{- end }}
+
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <!-- =================================================
+         Photo of the Day
+         ================================================= -->
+
+    {{- $photoPages := where site.RegularPages "Section" "gallery" }}
+    {{- $photoPage := first 1 ($photoPages.ByDate.Reverse) }}
+
+    {{- range $photoPage }}
+
+      {{- $page := . }}
+
+      <section class="home-potd">
+
+        <div class="potd-wrapper">
+
+          <div class="potd-container">
+
+            {{- with $page.Params.cover.image }}
+              {{- $coverName := . }}
+
+              {{- with $page.Resources.ByType "image" }}
+                {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+                  <img
+                    class="potd-blur-bg ratio-16-10"
+                    src="{{ .RelPermalink }}"
+                    alt="">
+
+                  <img
+                    class="potd-image ratio-16-10"
+                    src="{{ .RelPermalink }}"
+                    alt="{{ $page.Params.cover.alt | default $page.Title }}">
+
+                {{- end }}
+              {{- end }}
+
+            {{- end }}
+
+            <div class="potd-caption">
+
+              <div class="potd-text-link">
+
+                <div class="potd-label">
+                  PHOTO OF THE DAY
+                </div>
+
+                <h2 class="potd-title">
+                  {{ $page.Title }}
+                </h2>
+
+                {{- with $page.Description }}
+                  <p class="potd-description">
+                    {{ . }}
+                  </p>
+                {{- end }}
+
+              </div>
+
+              <a
+                class="potd-more"
+                href="/gallery/">
+                See More Photos
+              </a>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    {{- end }}
+
+
+    <!-- =================================================
+         Selected Tag Sections
+         ================================================= -->
+
+    <div class="container-1200">
+
+      <section class="home-tag-sections">
+
+        <h2>文学艺术</h2>
+
+        <div class="home-grid">
+
+          {{- $tagPages := slice }}
+
+          {{- range site.RegularPages }}
+
+            {{- $page := . }}
+
+            {{- range $page.Params.homepage }}
+
+              {{- if and
+                (eq .position "tag-section")
+                (eq .section "文學藝術")
+              }}
+
+                {{- $tagPages = $tagPages | append $page }}
+
+              {{- end }}
+
+            {{- end }}
+
+          {{- end }}
+
+
+          {{- range $tagPages }}
+
+            {{- $page := . }}
+
+            <article class="tag-card">
+
+              <a href="{{ $page.RelPermalink }}">
+
+                {{- with $page.Params.cover.image }}
+                  {{- $coverName := . }}
+
+                  {{- with $page.Resources.ByType "image" }}
+                    {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+                      <img
+                        class="ratio-4-3"
+                        src="{{ .RelPermalink }}"
+                        alt="{{ $page.Params.cover.alt | default $page.Title }}">
+
+                    {{- end }}
+                  {{- end }}
+
+                {{- end }}
+
+                <h3>
+                  {{ $page.Title }}
+                </h3>
+
+                {{- with $page.Description }}
+                  <p>{{ . }}</p>
+                {{- end }}
+
+              </a>
+
+            </article>
+
+          {{- end }}
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+
+</div>
+
+
+{{- end }}

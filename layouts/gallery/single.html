@@ -1,0 +1,55 @@
+{{- define "main" }}
+
+<main class="single-page gallery-single-page">
+
+  <div class="single-container">
+
+    <section class="single-content">
+
+      <article class="gallery-single">
+
+        <header class="gallery-single-header">
+
+          <h1>{{ .Title }}</h1>
+
+          {{- if .Date }}
+          <time datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "2006-01-02" }}
+          </time>
+          {{- end }}
+
+          {{- with .Description }}
+          <p class="gallery-single-description">
+            {{ . }}
+          </p>
+          {{- end }}
+
+        </header>
+
+        {{- with .Params.cover.image }}
+          {{- $coverName := . }}
+          {{- with $.Resources.ByType "image" }}
+            {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+            <figure class="gallery-single-figure">
+              <img
+                src="{{ .RelPermalink }}"
+                alt="{{ $.Params.cover.alt | default $.Title }}"
+              >
+            </figure>
+
+            {{- end }}
+          {{- end }}
+        {{- end }}
+
+      </article>
+
+    </section>
+
+    {{ partial "sidebar.html" . }}
+
+  </div>
+
+</main>
+
+{{- end }}

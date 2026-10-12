@@ -1,0 +1,504 @@
+/* =========================================================
+   Gallery / Photo of the Day
+   ========================================================= */
+
+
+/* =========================================================
+   Photo of the Day
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   POTD
+   --------------------------------------------------------- */
+
+.home-potd {
+  width: 100%;
+
+  margin: 64px 0 0;
+}
+
+.home-potd > .potd-wrapper {
+  width: 100%;
+}
+
+.potd-container {
+  position: relative;
+
+  width: min(1200px, 100%);
+
+  margin-inline: auto;
+
+  aspect-ratio: 16 / 10;
+
+  overflow: hidden;
+}
+
+.potd-blur-bg {
+  position: absolute;
+
+  inset: -32px;
+
+  width: calc(100% + 64px);
+  height: calc(100% + 64px);
+
+  max-width: none;
+
+  object-fit: cover;
+
+  filter: blur(24px);
+
+  transform: scale(1.04);
+
+  z-index: 0;
+}
+
+
+.home-potd .potd-container .potd-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+  max-width: none;
+
+  object-fit: contain;
+  object-position: center;
+
+  z-index: 1;
+}
+
+
+.potd-caption {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  padding: 48px 48px 32px;
+
+  color: #fff;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0)
+    );
+}
+
+.potd-caption h2 {
+  margin: 0;
+}
+
+.potd-caption p {
+  margin: 8px 0 0;
+}
+
+
+/* =========================================================
+   Gallery
+   ========================================================= */
+
+.gallery-page {
+  width: 100%;
+}
+
+.gallery-main .container-1200 {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.gallery-header {
+  margin-bottom: 40px;
+}
+
+.gallery-header h1 {
+  margin: 0;
+}
+
+
+/* ---------------------------------------------------------
+   Gallery Masonry
+   --------------------------------------------------------- */
+
+.gallery-masonry {
+  column-count: 3;
+
+  column-gap: 24px;
+}
+
+.gallery-item {
+  break-inside: avoid;
+
+  margin: 0 0 24px;
+}
+
+
+/* ---------------------------------------------------------
+   Gallery Item Button
+   ---------------------------------------------------------
+
+   原先这里使用 <a> 链接到 Gallery Single Page。
+
+   现在改为 button，由 JavaScript 打开全屏 Viewer。
+   --------------------------------------------------------- */
+
+.gallery-item-button {
+  display: block;
+
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  cursor: pointer;
+
+  text-align: left;
+}
+
+
+/* ---------------------------------------------------------
+   Gallery Image
+   --------------------------------------------------------- */
+
+.gallery-item-button img {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Gallery Item Info
+   --------------------------------------------------------- */
+
+.gallery-item-info {
+  padding-top: 10px;
+}
+
+.gallery-item-info h2 {
+  margin: 0;
+
+  font-size: 1rem;
+
+  line-height: 1.4;
+}
+
+.gallery-item-info time {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 0.85rem;
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   Fullscreen Gallery Viewer
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Viewer
+   --------------------------------------------------------- */
+
+.gallery-viewer {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: none;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: #777;
+
+  overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   Viewer Open State
+   --------------------------------------------------------- */
+
+.gallery-viewer.is-open {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+/* ---------------------------------------------------------
+   Viewer Content
+   --------------------------------------------------------- */
+
+.gallery-viewer-content {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 48px 64px;
+}
+
+
+/* ---------------------------------------------------------
+   Viewer Image
+   --------------------------------------------------------- */
+
+.gallery-viewer-image {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 100%;
+
+  max-height: calc(100vh - 220px);
+
+  object-fit: contain;
+}
+
+
+/* ---------------------------------------------------------
+   Viewer Information
+   --------------------------------------------------------- */
+
+.gallery-viewer-info {
+  width: 100%;
+
+  max-width: 900px;
+
+  margin-top: 20px;
+
+  color: #fff;
+
+  text-align: center;
+}
+
+
+/* ---------------------------------------------------------
+   Viewer Description
+   --------------------------------------------------------- */
+
+.gallery-viewer-description {
+  margin: 0;
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.95);
+}
+
+
+/* ---------------------------------------------------------
+   Viewer EXIF
+   --------------------------------------------------------- */
+
+.gallery-viewer-exif {
+  margin-top: 8px;
+
+  font-size: 0.75rem;
+
+  line-height: 1.5;
+
+  color: rgba(255, 255, 255, 0.70);
+
+  letter-spacing: 0.02em;
+}
+
+/* Original shooting time */
+
+.gallery-viewer-shooting-time {
+  margin-top: 10px;
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  opacity: 1;
+  animation: none;
+  transition: none;
+}
+
+.gallery-viewer-shooting-time[hidden] {
+  display: none;
+}
+
+
+/* ---------------------------------------------------------
+   Viewer Close Button
+   --------------------------------------------------------- */
+
+.gallery-viewer-close {
+  position: absolute;
+
+  top: 24px;
+  right: 28px;
+
+  z-index: 2;
+
+  width: 44px;
+  height: 44px;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 32px;
+
+  font-weight: 300;
+
+  line-height: 44px;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  opacity: 0.85;
+
+  transition: opacity 0.2s ease;
+}
+
+.gallery-viewer-close:hover {
+  opacity: 1;
+}
+
+
+/* ---------------------------------------------------------
+   Lock Page Scroll
+   --------------------------------------------------------- */
+
+body.gallery-viewer-open {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .gallery-masonry {
+    column-count: 2;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .gallery-viewer-content {
+    padding: 48px 32px;
+  }
+
+  .gallery-viewer-image {
+    max-height: calc(100vh - 210px);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .gallery-masonry {
+    column-count: 1;
+  }
+
+  .gallery-item {
+    margin-bottom: 32px;
+  }
+
+
+  /* POTD */
+
+  .home-potd {
+    margin-top: 48px;
+  }
+
+  .potd-container {
+    aspect-ratio: 4 / 3;
+  }
+
+  .potd-caption {
+    padding: 32px 24px 24px;
+  }
+
+
+  /* Viewer */
+
+  .gallery-viewer-content {
+    padding: 48px 20px;
+  }
+
+  .gallery-viewer-image {
+    max-height: calc(100vh - 190px);
+  }
+
+  .gallery-viewer-info {
+    max-width: 100%;
+
+    margin-top: 16px;
+  }
+
+  .gallery-viewer-description {
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+  }
+
+  .gallery-viewer-exif {
+    margin-top: 6px;
+
+    font-size: 0.7rem;
+
+    line-height: 1.4;
+  }
+
+  .gallery-viewer-close {
+    top: 16px;
+    right: 16px;
+
+    width: 40px;
+    height: 40px;
+
+    font-size: 30px;
+
+    line-height: 40px;
+  }
+
+}

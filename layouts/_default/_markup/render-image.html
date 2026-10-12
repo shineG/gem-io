@@ -1,0 +1,22 @@
+{{- $image := .Page.Resources.GetMatch .Destination -}}
+{{- $orientation := "portrait" -}}
+
+{{- with $image -}}
+  {{- if gt .Width .Height -}}
+    {{- $orientation = "landscape" -}}
+  {{- else if eq .Width .Height -}}
+    {{- $orientation = "square" -}}
+  {{- end -}}
+{{- end -}}
+
+<figure class="article-image {{ $orientation }}">
+  <img
+    src="{{ .Destination | safeURL }}"
+    alt="{{ .Text }}"
+    {{- with .Title }} title="{{ . }}"{{ end }}
+  >
+
+  {{- with .Text }}
+  <figcaption>{{ . }}</figcaption>
+  {{- end }}
+</figure>

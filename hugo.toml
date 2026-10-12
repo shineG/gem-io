@@ -1,0 +1,129 @@
+baseURL = "http://localhost:1313/"
+title = "gem-io | Beyond pixels lies truth"
+theme = "PaperMod"
+timeZone = "Asia/Shanghai"
+
+defaultContentLanguage = "zh"
+hasCJKLanguage = true
+defaultContentLanguageInSubdir = false
+
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 10
+
+
+# --------------------------------------------------
+# Taxonomies
+# --------------------------------------------------
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+
+# --------------------------------------------------
+# Permalinks
+# --------------------------------------------------
+
+[permalinks]
+  posts = "/posts/:year/:month/:slug/"
+  gallery = "/gallery/:slug/"
+  stories = "/stories/:slug/"
+  about = "/about/:slug/"
+
+
+# --------------------------------------------------
+# Markup
+# --------------------------------------------------
+
+[markup]
+
+  [markup.goldmark]
+
+    [markup.goldmark.renderer]
+      unsafe = true
+
+  [markup.highlight]
+    noClasses = false
+
+
+# --------------------------------------------------
+# Outputs
+# --------------------------------------------------
+
+[outputs]
+
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
+
+
+# --------------------------------------------------
+# Related Content
+# --------------------------------------------------
+
+[related]
+
+  includeNewer = true
+  threshold = 80
+  toLower = false
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 60
+
+  [[related.indices]]
+    name = "date"
+    weight = 10
+
+
+# --------------------------------------------------
+# Sitemap
+# --------------------------------------------------
+
+[sitemap]
+
+  changefreq = "weekly"
+  priority = 0.5
+
+
+# --------------------------------------------------
+# Site Parameters
+# --------------------------------------------------
+
+[params]
+
+  description = "Beyond pixels lies truth"
+  author = "yunghsiang.k"
+  social = {}
+
+  ShowReadingTime = false
+  ShowWordCount = false
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = false
+  ShowCodeCopyButtons = true
+  ShowToc = false
+
+  comments = true
+
+
+# --------------------------------------------------
+# Main Navigation
+# --------------------------------------------------
+
+[menu]
+
+  [[menu.main]]
+    name = "ABOUT"
+    url = "/about/"
+    weight = 10
+
+[params.assets]
+  favicon = "/favicon.ico"

@@ -1,0 +1,91 @@
+<aside class="single-sidebar">
+
+    <div class="sidebar-block">
+      <h2>Search</h2>
+
+      <form class="sidebar-search" action="/search/" method="get">
+        <input
+          type="search"
+          name="q"
+          placeholder="Search..."
+          aria-label="Search">
+
+        <button type="submit" aria-label="Submit search">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="6.3"></circle>
+            <path d="m15.5 15.5 4.2 4.2"></path>
+          </svg>
+        </button>
+      </form>
+    </div>
+
+  <div class="sidebar-block">
+    <h2>Categories</h2>
+
+    <ul class="sidebar-list">
+      {{- range $name, $taxonomy := site.Taxonomies.categories }}
+      <li>
+        <a href="{{ $taxonomy.Page.RelPermalink }}">
+          {{ $taxonomy.Page.LinkTitle }}
+        </a>
+        <span>{{ $taxonomy.Count }}</span>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+
+
+  <div class="sidebar-block">
+    <h2>Tags</h2>
+
+    <div class="sidebar-tags">
+      {{- range $name, $taxonomy := site.Taxonomies.tags }}
+      <a class="sidebar-tag" href="{{ $taxonomy.Page.RelPermalink }}">
+        <span class="sidebar-tag-name">{{ $taxonomy.Page.LinkTitle }}</span>
+        <span class="sidebar-tag-count">{{ $taxonomy.Count }}</span>
+      </a>
+      {{- end }}
+    </div>
+  </div>
+
+
+
+  <div class="sidebar-block">
+    <h2>Timeline</h2>
+
+    {{- $posts := where site.RegularPages "Section" "posts" }}
+    {{- $years := $posts.GroupByDate "2006" }}
+
+    <div class="sidebar-timeline">
+      {{- range $years }}
+      {{- $year := .Key }}
+
+      <details>
+          <summary>
+            <span class="timeline-year">
+              <span class="timeline-arrow" aria-hidden="true"></span>
+              <span>{{ $year }}</span>
+            </span>
+            <span>{{ len .Pages }}</span>
+          </summary>
+
+        <ul>
+          {{- range .Pages.GroupByDate "2006-01" }}
+          {{- $month := .Key }}
+
+          <li>
+            <a href="{{ printf "/archives/%s/" $month | relURL }}">
+              {{ $month }}
+            </a>
+            <span>{{ len .Pages }}</span>
+          </li>
+
+          {{- end }}
+        </ul>
+      </details>
+
+      {{- end }}
+    </div>
+  </div>
+
+</aside>

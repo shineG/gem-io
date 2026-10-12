@@ -1,0 +1,31 @@
+{{- $.Scratch.Add "index" slice -}}
+
+{{- range site.RegularPages -}}
+  {{- $page := . -}}
+
+  {{- if and (not $page.Params.searchHidden) (ne $page.Layout "archives") (ne $page.Layout "search") -}}
+
+    {{- $tags := $page.Params.tags | default slice -}}
+
+    {{- $cover := "" -}}
+    {{- with $page.Params.cover.image -}}
+      {{- $coverName := . -}}
+      {{- with $page.Resources.GetMatch $coverName -}}
+        {{- $cover = .RelPermalink -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $.Scratch.Add "index" (dict
+      "title" $page.Title
+      "content" $page.Plain
+      "permalink" $page.Permalink
+      "summary" ($page.Summary | plainify | htmlUnescape)
+      "description" $page.Description
+      "tags" $tags
+      "cover" $cover
+    ) -}}
+
+  {{- end -}}
+{{- end -}}
+
+{{- $.Scratch.Get "index" | jsonify -}}

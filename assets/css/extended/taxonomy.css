@@ -1,0 +1,293 @@
+
+/* =========================================================
+   Posts Archive
+   ========================================================= */
+
+.archive-page .archive-content {
+  grid-column: span 8;
+  min-width: 0;
+}
+
+.archive-page .single-sidebar {
+  grid-column: span 4;
+  min-width: 0;
+}
+
+.archive-header {
+  margin-bottom: 32px;
+}
+
+.archive-header h1 {
+  margin: 0;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+
+.archive-card {
+  min-width: 0;
+}
+
+.archive-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.archive-card-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+}
+
+.archive-card-tag {
+  margin-top: 12px;
+  color: var(--secondary);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.archive-card-title {
+  margin: 6px 0 0;
+  font-size: 1.1rem;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.archive-card-description {
+  margin: 8px 0 0;
+  color: var(--secondary);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.archive-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+@media (max-width: 1000px) {
+  .archive-page .single-container {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-page .archive-content,
+  .archive-page .single-sidebar {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .archive-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+
+
+/* =========================================================
+   Sidebar Timeline
+   ========================================================= */
+
+.sidebar-timeline summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.sidebar-timeline summary::-webkit-details-marker {
+  display: none;
+}
+
+.sidebar-timeline summary::marker {
+  content: "";
+}
+
+.sidebar-timeline .timeline-year {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-timeline .timeline-arrow {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 0.18s ease;
+}
+
+.sidebar-timeline details[open] > summary .timeline-arrow {
+  transform: rotate(45deg);
+}
+
+.sidebar-timeline summary > span:last-child,
+.sidebar-timeline li > span:last-child {
+  margin-left: auto;
+  color: var(--secondary);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+/* Month list */
+.sidebar-timeline details > ul {
+  padding: 0;
+  padding-left: 14px;
+  margin: 0;
+  list-style: none;
+}
+
+
+.sidebar-timeline details > ul > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.sidebar-timeline li a {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.sidebar-timeline li a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+
+
+
+
+/* =========================================================
+   Sidebar Tags
+   ========================================================= */
+
+.sidebar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.sidebar-tags .sidebar-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 4px 9px;
+  border: 1px solid var(--tertiary);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--primary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  text-decoration: none;
+  list-style: none;
+}
+
+.sidebar-tags .sidebar-tag:hover {
+  border-color: var(--secondary);
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.sidebar-tags .sidebar-tag-name {
+  overflow-wrap: anywhere;
+}
+
+.sidebar-tags .sidebar-tag .sidebar-tag-count {
+  color: var(--secondary);
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 1;
+}
+
+
+/* =========================================================
+   Sidebar Search
+   ========================================================= */
+
+.sidebar-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border-bottom: 1px solid var(--tertiary);
+  padding: 4px 0 8px;
+}
+
+.sidebar-search input[type="search"] {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: 4px 0;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  color: var(--primary);
+  font: inherit;
+}
+
+.sidebar-search input[type="search"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.sidebar-search input[type="search"]::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
+.sidebar-search button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--secondary);
+  cursor: pointer;
+}
+
+.sidebar-search button:hover {
+  color: var(--primary);
+}
+
+.sidebar-search button svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

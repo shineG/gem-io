@@ -1,0 +1,15 @@
+# Hugo build output
+/public/
+
+# Generated Hugo resources
+/resources/_gen/
+
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Hugo temporary lock
+.hugo_build.lock
+
+# Old generated website copy
+/isableFastRender/

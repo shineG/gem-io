@@ -1,0 +1,364 @@
+/* =========================================
+   Single Article
+   ========================================= */
+
+
+/* ---------------------------------------------------------
+   Single Page
+   --------------------------------------------------------- */
+
+.single-page {
+  width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   12-column Layout
+   --------------------------------------------------------- */
+
+   .single-container {
+     width: 1200px;
+     max-width: 1200px;
+     margin: 0 auto;
+
+     display: grid;
+     grid-template-columns: repeat(12, minmax(0, 1fr));
+     column-gap: 40px;
+     align-items: start;
+   }
+
+
+
+/* ---------------------------------------------------------
+   Main Article
+   8/12
+   --------------------------------------------------------- */
+
+.single-content {
+  grid-column: span 8;
+  min-width: 0;
+}
+
+
+/* ---------------------------------------------------------
+   Article Header
+   --------------------------------------------------------- */
+
+.single-content .post-header {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.single-content .post-title {
+  width: 100%;
+  max-width: none;
+
+  margin-left: 0;
+  margin-right: 0;
+
+  text-align: left;
+}
+
+.single-content .post-meta {
+  width: 100%;
+  max-width: none;
+
+  margin-left: 0;
+  margin-right: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+
+  text-align: left;
+}
+
+
+/* ---------------------------------------------------------
+   Article Content
+   --------------------------------------------------------- */
+
+.single-content .post-content {
+  width: 100%;
+  max-width: none;
+
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 20px;
+
+  text-align: left;
+}
+
+
+/* ---------------------------------------------------------
+   Article Text & Headings
+   6/12
+
+   Markdown:
+   # / ## / ### / #### / ##### / ######
+   全部保持左對齊。
+
+   正文文字與標題共享同一條左邊緣。
+   --------------------------------------------------------- */
+
+.single-content .post-content p,
+.single-content .post-content ul,
+.single-content .post-content ol,
+.single-content .post-content blockquote,
+.single-content .post-content h1,
+.single-content .post-content h2,
+.single-content .post-content h3,
+.single-content .post-content h4,
+.single-content .post-content h5,
+.single-content .post-content h6,
+.single-content .post-content pre,
+.single-content .post-content table {
+  width: 75%;
+  max-width: none;
+
+  margin-left: 0;
+  margin-right: auto;
+
+  text-align: left;
+}
+
+
+/* ---------------------------------------------------------
+   Headings
+   --------------------------------------------------------- */
+
+.single-content .post-content h1,
+.single-content .post-content h2,
+.single-content .post-content h3,
+.single-content .post-content h4,
+.single-content .post-content h5,
+.single-content .post-content h6 {
+  text-align: left;
+}
+
+
+/* ---------------------------------------------------------
+   Article Images
+   --------------------------------------------------------- */
+
+/*
+   Main article area = 8/12
+
+   Landscape → 8/12
+   Square    → 6/12
+   Portrait  → 6/12
+*/
+
+.single-content .post-content figure {
+  max-width: none;
+
+  margin-left: 0;
+  margin-right: auto;
+
+  text-align: left;
+}
+
+
+/* Landscape
+   8/12
+*/
+
+.single-content .post-content figure.landscape {
+  width: 100%;
+}
+
+
+/* Square / Portrait
+   6/12
+*/
+
+.single-content .post-content figure.square,
+.single-content .post-content figure.portrait {
+  width: 75%;
+}
+
+
+/* ---------------------------------------------------------
+   Image
+   --------------------------------------------------------- */
+
+.single-content .post-content figure img {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* ---------------------------------------------------------
+   Image Caption
+   --------------------------------------------------------- */
+
+/*
+   Landscape figure = 8/12
+   Caption = 6/12
+
+   Square / Portrait figure = 6/12
+   Caption = 6/12
+*/
+
+.single-content .post-content figure figcaption {
+  width: 75%;
+  max-width: none;
+
+  margin-left: 0;
+  margin-right: auto;
+
+  text-align: left;
+}
+
+
+/* Square / Portrait caption
+   figure itself is already 6/12,
+   so caption fills the figure.
+*/
+
+.single-content .post-content figure.square figcaption,
+.single-content .post-content figure.portrait figcaption {
+  width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Sidebar
+   4/12
+   --------------------------------------------------------- */
+
+.single-sidebar {
+  grid-column: span 4;
+  min-width: 0;
+
+  position: sticky;
+  top: 32px;
+}
+
+
+/* ---------------------------------------------------------
+   Sidebar Blocks
+   --------------------------------------------------------- */
+
+.sidebar-block {
+  margin-bottom: 36px;
+}
+
+.sidebar-block h2 {
+  margin: 0 0 16px;
+
+  font-size: 1.1rem;
+}
+
+
+/* ---------------------------------------------------------
+   Sidebar Lists
+   --------------------------------------------------------- */
+
+.sidebar-list {
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar-list li {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: baseline;
+
+  gap: 16px;
+  padding: 6px 0;
+}
+
+.sidebar-list a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sidebar-list a:hover {
+  text-decoration: underline;
+}
+
+.sidebar-list span {
+  opacity: 0.55;
+  font-size: 0.9em;
+}
+
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+
+  .single-container {
+    grid-template-columns: 1fr;
+  }
+
+  .single-content,
+  .single-sidebar {
+    grid-column: 1 / -1;
+  }
+
+  .single-sidebar {
+    position: static;
+    margin-top: 48px;
+  }
+
+
+  /* Text & headings → full width */
+
+  .single-content .post-content p,
+  .single-content .post-content ul,
+  .single-content .post-content ol,
+  .single-content .post-content blockquote,
+  .single-content .post-content h1,
+  .single-content .post-content h2,
+  .single-content .post-content h3,
+  .single-content .post-content h4,
+  .single-content .post-content h5,
+  .single-content .post-content h6,
+  .single-content .post-content pre,
+  .single-content .post-content table {
+    width: 100%;
+  }
+
+
+  /* All images → full width */
+
+  .single-content .post-content figure.landscape,
+  .single-content .post-content figure.square,
+  .single-content .post-content figure.portrait {
+    width: 100%;
+  }
+
+
+  /* All captions → full width */
+
+  .single-content .post-content figure figcaption,
+  .single-content .post-content figure.square figcaption,
+  .single-content .post-content figure.portrait figcaption {
+    width: 100%;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   Mobile
+   --------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+  .single-container {
+    width: min(100% - 24px, 540px);
+  }
+
+}

@@ -1,0 +1,705 @@
+/* =========================================================
+   Homepage
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Homepage
+   --------------------------------------------------------- */
+
+.home-page {
+  width: 100%;
+  max-width: none;
+}
+
+
+/* PaperMod homepage header spacing */
+
+.home-page > .header {
+  margin-top: calc(-1 * var(--gap));
+}
+
+
+/* ---------------------------------------------------------
+   Main Homepage Area
+   --------------------------------------------------------- */
+
+.home-main {
+  width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   Recent Updates
+   --------------------------------------------------------- */
+
+   .home-recent {
+     grid-column: span 4;
+     min-width: 0;
+   }
+
+   .home-recent > h2 {
+     margin: 0 0 24px;
+   }
+
+   .recent-item {
+     min-width: 0;
+     height: auto;
+   }
+
+   .recent-item + .recent-item {
+     margin-top: 26px;
+   }
+
+   .recent-item a {
+     display: grid;
+     grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+     column-gap: 16px;
+     align-items: start;
+     text-decoration: none;
+   }
+
+   .recent-thumb {
+     display: block;
+     width: 100%;
+     aspect-ratio: 1 / 1;
+     object-fit: cover;
+     object-position: center;
+   }
+
+   .recent-info {
+     min-width: 0;
+     height: auto;
+   }
+
+   .recent-tag {
+     margin: 0 0 6px;
+     font-size: 0.75rem;
+     line-height: 1.4;
+     letter-spacing: 0.04em;
+     color: var(--secondary);
+   }
+
+   .recent-info .recent-title {
+     margin: 0;
+     font-size: 1rem;
+     line-height: 1.45;
+     font-weight: 600;
+   }
+
+   .recent-info .recent-description {
+     margin: 8px 0 0;
+     font-size: 0.875rem;
+     line-height: 1.55;
+     color: var(--secondary);
+   }
+
+   .recent-more {
+     margin-top: 28px;
+   }
+
+   .recent-thumb-aligned {
+     margin-top: 1.4em;
+   }
+
+
+
+/* ---------------------------------------------------------
+   Main Focus
+   --------------------------------------------------------- */
+
+.home-focus {
+  grid-column: span 8;
+  min-width: 0;
+}
+
+.main-focus {
+  min-width: 0;
+}
+
+.main-focus-link {
+  display: block;
+
+  width: 100%;
+
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ---------------------------------------------------------
+   Main Focus Image
+   --------------------------------------------------------- */
+
+.main-focus-image-wrap {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 4 / 3;
+
+  overflow: hidden;
+}
+
+.main-focus-image {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* ---------------------------------------------------------
+   Main Focus Overlay
+   --------------------------------------------------------- */
+
+.main-focus-overlay {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  padding: 80px 40px 32px;
+
+  color: #fff;
+
+  text-align: left;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.72) 38%,
+      rgba(0, 0, 0, 0.34) 68%,
+      rgba(0, 0, 0, 0.00) 100%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   Main Focus Tag
+   --------------------------------------------------------- */
+
+.main-focus-tag {
+  margin: 0 0 8px;
+
+  font-size: 0.95rem;
+  line-height: 1.4;
+
+  letter-spacing: 0.06em;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* ---------------------------------------------------------
+   Main Focus Title
+   --------------------------------------------------------- */
+
+.main-focus-title {
+  margin: 0;
+
+  font-size: 2rem;
+  line-height: 1.25;
+
+  font-weight: 600;
+
+  color: #fff;
+}
+
+
+/* ---------------------------------------------------------
+   Main Focus Description
+   --------------------------------------------------------- */
+
+.main-focus-description {
+  max-width: 90%;
+
+  margin: 10px 0 0;
+
+  font-size: 1.05rem;
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* ---------------------------------------------------------
+   Secondary Cards
+   --------------------------------------------------------- */
+
+.home-secondary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  column-gap: 24px;
+
+  margin-top: 32px;
+
+  /*
+   * 不改变 HTML 顺序。
+   * priority 的排序由 Hugo 模板完成。
+   */
+}
+
+.secondary-card {
+  min-width: 0;
+}
+
+.secondary-image {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 5 / 4;
+
+  object-fit: cover;
+}
+
+.secondary-card h3 {
+  margin-top: 12px;
+}
+
+
+/* =========================================================
+   Photo of the Day
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   POTD Section
+   --------------------------------------------------------- */
+
+.home-potd {
+  width: 100%;
+
+  margin-top: 64px;
+}
+
+
+/* ---------------------------------------------------------
+   POTD Wrapper
+   --------------------------------------------------------- */
+
+.home-potd .potd-wrapper {
+  width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   POTD Container
+   ---------------------------------------------------------
+
+   强制使用全站 1200px container 内的宽度。
+
+   这里使用更高 specificity，
+   覆盖 gallery.css 中原来的：
+
+   .potd-container {
+     width: min(1440px, 100%);
+   }
+   /* ---------------------------------------------------------
+   POTD Container
+   --------------------------------------------------------- */
+
+   .home-potd .potd-container {
+     position: relative;
+
+     width: 100%;
+     max-width: 1200px;
+
+     margin-left: auto;
+     margin-right: auto;
+
+     aspect-ratio: 16 / 10;
+
+     overflow: hidden;
+   }
+
+
+/* ---------------------------------------------------------
+   POTD Image Link
+   --------------------------------------------------------- */
+
+.home-potd .potd-image-link {
+  display: block;
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  text-decoration: none;
+}
+
+
+/* ---------------------------------------------------------
+   POTD Blurred Background
+   --------------------------------------------------------- */
+
+.home-potd .potd-blur-bg {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+
+  object-fit: cover;
+
+  filter: blur(24px);
+
+  transform: scale(1.08);
+
+  z-index: 0;
+}
+
+
+/* ---------------------------------------------------------
+   POTD Main Photograph
+   --------------------------------------------------------- */
+
+.home-potd .potd-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  max-width: none;
+
+  object-fit: cover !important;
+
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   POTD Caption Overlay
+   --------------------------------------------------------- */
+
+.home-potd .potd-caption {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  padding: 96px 48px 40px;
+
+  color: #fff;
+
+  text-align: left;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.72) 38%,
+      rgba(0, 0, 0, 0.34) 68%,
+      rgba(0, 0, 0, 0.00) 100%
+    );
+}
+
+
+/* ---------------------------------------------------------
+   POTD Text Link
+   --------------------------------------------------------- */
+
+.home-potd .potd-text-link {
+  display: block;
+
+  color: inherit;
+
+  text-decoration: none;
+}
+
+
+/* ---------------------------------------------------------
+   POTD Label
+   --------------------------------------------------------- */
+
+.home-potd .potd-label {
+  margin: 0 0 8px;
+
+  font-size: 0.95rem;
+  line-height: 1.4;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* ---------------------------------------------------------
+   POTD Title
+   --------------------------------------------------------- */
+
+.home-potd .potd-title {
+  margin: 0;
+
+  font-size: 2rem;
+  line-height: 1.25;
+
+  font-weight: 600;
+
+  color: #fff;
+}
+
+
+/* ---------------------------------------------------------
+   POTD Description
+   --------------------------------------------------------- */
+
+.home-potd .potd-description {
+  max-width: 90%;
+
+  margin: 10px 0 0;
+
+  font-size: 1.05rem;
+  line-height: 1.6;
+
+  color: rgba(255, 255, 255, 0.92);
+}
+
+
+/* ---------------------------------------------------------
+   See More Photos
+   --------------------------------------------------------- */
+
+.home-potd .potd-more {
+  display: inline-block;
+
+  margin-top: 24px;
+
+  padding: 9px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.75);
+
+  color: #fff;
+
+  font-size: 0.75rem;
+  line-height: 1;
+
+  letter-spacing: 0.08em;
+
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.home-potd .potd-more:hover {
+  background: #fff;
+
+  color: #000;
+}
+
+
+/* ---------------------------------------------------------
+   Tag Sections
+   --------------------------------------------------------- */
+
+.home-tag-sections {
+  margin-top: 64px;
+}
+
+.home-tag-sections > h2 {
+  margin-bottom: 32px;
+}
+
+.tag-card {
+  grid-column: span 3;
+  min-width: 0;
+}
+
+.tag-card img {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 4 / 3;
+
+  object-fit: cover;
+}
+
+.tag-card h3 {
+  margin-top: 12px;
+}
+
+
+/* ---------------------------------------------------------
+   Footer
+   --------------------------------------------------------- */
+
+.site-footer {
+  width: 100%;
+}
+
+
+/* =========================================================
+   Responsive Homepage
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .home-recent,
+  .home-focus {
+    grid-column: 1 / -1;
+  }
+
+
+  .home-secondary-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+
+  .tag-card {
+    grid-column: span 6;
+  }
+
+
+  /* -------------------------------------------------------
+     Main Focus
+     ------------------------------------------------------- */
+
+  .main-focus-overlay {
+    padding: 64px 32px 28px;
+  }
+
+  .main-focus-title {
+    font-size: 1.75rem;
+  }
+
+
+  /* -------------------------------------------------------
+     Photo of the Day
+     ------------------------------------------------------- */
+
+  .home-potd .potd-caption {
+    padding: 72px 32px 32px;
+  }
+
+  .home-potd .potd-title {
+    font-size: 1.75rem;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .home-secondary-grid {
+    grid-template-columns: 1fr;
+
+    row-gap: 32px;
+  }
+
+
+  .tag-card {
+    grid-column: 1 / -1;
+  }
+
+
+  /* -------------------------------------------------------
+     Main Focus
+     ------------------------------------------------------- */
+
+  .main-focus-image-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .main-focus-overlay {
+    padding: 56px 24px 24px;
+  }
+
+  .main-focus-tag {
+    margin-bottom: 6px;
+
+    font-size: 0.7rem;
+  }
+
+  .main-focus-title {
+    font-size: 1.5rem;
+
+    line-height: 1.3;
+  }
+
+  .main-focus-description {
+    max-width: 100%;
+
+    margin-top: 8px;
+
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+
+  /* -------------------------------------------------------
+     Photo of the Day
+     ------------------------------------------------------- */
+
+  .home-potd .potd-container {
+    aspect-ratio: 4 / 3;
+  }
+
+  .home-potd .potd-caption {
+    padding: 64px 24px 24px;
+  }
+
+  .home-potd .potd-label {
+    margin-bottom: 6px;
+
+    font-size: 0.7rem;
+  }
+
+  .home-potd .potd-title {
+    font-size: 1.5rem;
+
+    line-height: 1.3;
+  }
+
+  .home-potd .potd-description {
+    max-width: 100%;
+
+    margin-top: 8px;
+
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .home-potd .potd-more {
+    margin-top: 20px;
+
+    padding: 8px 14px;
+
+    font-size: 0.7rem;
+  }
+}
+
+/* 确保副焦点卡片正确显示 */
+.home-secondary-grid .secondary-card {
+  width: 100%;
+  min-width: 0;
+}
+
+/* 确保在不同屏幕尺寸下都正常显示 */
+.home-secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 24px;
+  margin-top: 32px;
+}

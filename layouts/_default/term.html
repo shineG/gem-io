@@ -1,0 +1,87 @@
+{{- define "main" }}
+
+<main class="single-page archive-page">
+  <div class="single-container">
+
+    <section class="archive-content">
+
+      <header class="archive-header">
+        <h1>{{ .Title }}</h1>
+      </header>
+
+      {{- $pages := .Pages.ByDate.Reverse }}
+      {{- $paginator := .Paginate $pages 10 }}
+
+      <div class="archive-grid">
+
+        {{- range $paginator.Pages }}
+        {{- $page := . }}
+
+        <article class="archive-card">
+          <a class="archive-card-link" href="{{ $page.RelPermalink }}">
+
+            {{- with $page.Params.cover.image }}
+              {{- $coverName := . }}
+              {{- with $page.Resources.ByType "image" }}
+                {{- with .GetMatch (printf "*%s*" $coverName) }}
+                  <img
+                    class="archive-card-image"
+                    src="{{ .RelPermalink }}"
+                    alt="{{ $page.Params.cover.alt | default $page.Title }}">
+                {{- end }}
+              {{- end }}
+            {{- end }}
+
+            {{- with $page.Params.tags }}
+              <div class="archive-card-tag">
+                {{ index . 0 }}
+              </div>
+            {{- end }}
+
+            <h2 class="archive-card-title">
+              {{ $page.Title }}
+            </h2>
+
+            {{- with $page.Description }}
+              <p class="archive-card-description">
+                {{ . }}
+              </p>
+            {{- else }}
+              <p class="archive-card-description">
+                {{ $page.Summary | plainify | htmlUnescape }}
+              </p>
+            {{- end }}
+
+          </a>
+        </article>
+
+        {{- end }}
+
+      </div>
+
+      {{- if gt $paginator.TotalPages 1 }}
+      <nav class="archive-pagination" aria-label="Pagination">
+
+        {{- if $paginator.HasPrev }}
+          <a href="{{ $paginator.Prev.URL }}">上一页</a>
+        {{- end }}
+
+        <span>
+          {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}
+        </span>
+
+        {{- if $paginator.HasNext }}
+          <a href="{{ $paginator.Next.URL }}">下一页</a>
+        {{- end }}
+
+      </nav>
+      {{- end }}
+
+    </section>
+
+    {{ partial "sidebar.html" . }}
+
+  </div>
+</main>
+
+{{- end }}
