@@ -1,364 +1,303 @@
-/* =========================================
-   Single Article
-   ========================================= */
+
+/* =========================================================
+   Single Page Layout
+   ---------------------------------------------------------
+   Desktop:
+   - Container: maximum 1024px
+   - Main content: columns 1–7
+   - Empty gutter: column 8
+   - Sidebar: columns 9–12
+
+   Mobile:
+   - Main content and sidebar stack vertically
+   ========================================================= */
 
 
 /* ---------------------------------------------------------
-   Single Page
+   Single Container
    --------------------------------------------------------- */
 
-.single-page {
-  width: 100%;
-}
+.single-container {
+  width: min(1024px, calc(100% - 48px));
+  max-width: 1024px;
+  margin-inline: auto;
 
-
-/* ---------------------------------------------------------
-   12-column Layout
-   --------------------------------------------------------- */
-
-   .single-container {
-     width: 1200px;
-     max-width: 1200px;
-     margin: 0 auto;
-
-     display: grid;
-     grid-template-columns: repeat(12, minmax(0, 1fr));
-     column-gap: 40px;
-     align-items: start;
-   }
-
-
-
-/* ---------------------------------------------------------
-   Main Article
-   8/12
-   --------------------------------------------------------- */
-
-.single-content {
-  grid-column: span 8;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 0;
+  align-items: start;
   min-width: 0;
 }
 
 
 /* ---------------------------------------------------------
-   Article Header
+   Main Article Content: 7 Columns
    --------------------------------------------------------- */
 
-.single-content .post-header {
-  width: 100%;
-  margin: 0;
-  padding: 0;
+.single-content {
+  grid-column: 1 / span 7;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
-.single-content .post-title {
+/* Keep the article header, body, metadata, TOC and footer
+   aligned to the same left edge and reading width. */
+
+.single-content .post-header,
+.single-content .post-content,
+.single-content .post-footer,
+.single-content .post-meta,
+.single-content .toc {
   width: 100%;
-  max-width: none;
-
-  margin-left: 0;
-  margin-right: 0;
-
-  text-align: left;
-}
-
-.single-content .post-meta {
-  width: 100%;
-  max-width: none;
-
-  margin-left: 0;
-  margin-right: 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-
-  text-align: left;
+  max-width: 100%;
+  min-width: 0;
 }
 
 
 /* ---------------------------------------------------------
-   Article Content
-   --------------------------------------------------------- */
-
-.single-content .post-content {
-  width: 100%;
-  max-width: none;
-
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 20px;
-
-  text-align: left;
-}
-
-
-/* ---------------------------------------------------------
-   Article Text & Headings
-   6/12
-
-   Markdown:
-   # / ## / ### / #### / ##### / ######
-   全部保持左對齊。
-
-   正文文字與標題共享同一條左邊緣。
+   Article Text and Media
    --------------------------------------------------------- */
 
 .single-content .post-content p,
-.single-content .post-content ul,
-.single-content .post-content ol,
-.single-content .post-content blockquote,
-.single-content .post-content h1,
-.single-content .post-content h2,
-.single-content .post-content h3,
-.single-content .post-content h4,
-.single-content .post-content h5,
-.single-content .post-content h6,
-.single-content .post-content pre,
-.single-content .post-content table {
-  width: 75%;
-  max-width: none;
-
-  margin-left: 0;
-  margin-right: auto;
-
-  text-align: left;
+.single-content .post-content li,
+.single-content .post-content figcaption,
+.single-content .post-content .caption {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
-
-
-/* ---------------------------------------------------------
-   Headings
-   --------------------------------------------------------- */
-
-.single-content .post-content h1,
-.single-content .post-content h2,
-.single-content .post-content h3,
-.single-content .post-content h4,
-.single-content .post-content h5,
-.single-content .post-content h6 {
-  text-align: left;
-}
-
-
-/* ---------------------------------------------------------
-   Article Images
-   --------------------------------------------------------- */
-
-/*
-   Main article area = 8/12
-
-   Landscape → 8/12
-   Square    → 6/12
-   Portrait  → 6/12
-*/
 
 .single-content .post-content figure {
-  max-width: none;
-
-  margin-left: 0;
-  margin-right: auto;
-
-  text-align: left;
+  max-width: 100%;
+  margin-inline: 0;
 }
 
-
-/* Landscape
-   8/12
-*/
-
-.single-content .post-content figure.landscape {
-  width: 100%;
+.single-content img,
+.single-content video,
+.single-content iframe,
+.single-content figure {
+  max-width: 100%;
 }
 
-
-/* Square / Portrait
-   6/12
-*/
-
-.single-content .post-content figure.square,
-.single-content .post-content figure.portrait {
-  width: 75%;
+.single-content img,
+.single-content video {
+  height: auto;
 }
-
-
-/* ---------------------------------------------------------
-   Image
-   --------------------------------------------------------- */
 
 .single-content .post-content figure img {
   display: block;
-
-  width: 100%;
+  width: auto;
   max-width: 100%;
   height: auto;
 }
 
-
-/* ---------------------------------------------------------
-   Image Caption
-   --------------------------------------------------------- */
-
-/*
-   Landscape figure = 8/12
-   Caption = 6/12
-
-   Square / Portrait figure = 6/12
-   Caption = 6/12
-*/
-
-.single-content .post-content figure figcaption {
-  width: 75%;
-  max-width: none;
-
-  margin-left: 0;
-  margin-right: auto;
-
-  text-align: left;
+.single-content a,
+.single-content p,
+.single-content li {
+  overflow-wrap: anywhere;
 }
 
-
-/* Square / Portrait caption
-   figure itself is already 6/12,
-   so caption fills the figure.
-*/
-
-.single-content .post-content figure.square figcaption,
-.single-content .post-content figure.portrait figcaption {
-  width: 100%;
+.single-content > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 
 /* ---------------------------------------------------------
-   Sidebar
-   4/12
+   Sidebar: Columns 9–12
+   Column 8 remains empty as the gutter.
    --------------------------------------------------------- */
 
 .single-sidebar {
-  grid-column: span 4;
+  grid-column: 9 / span 4;
   min-width: 0;
-
+  max-width: 100%;
   position: sticky;
   top: 32px;
+  color: var(--primary);
+}
+
+.single-sidebar > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 
 /* ---------------------------------------------------------
-   Sidebar Blocks
+   Sidebar Modules
    --------------------------------------------------------- */
 
-.sidebar-block {
-  margin-bottom: 36px;
+.single-sidebar .sidebar-block {
+  min-width: 0;
+  margin: 0 0 36px;
 }
 
-.sidebar-block h2 {
+.single-sidebar .sidebar-block h2 {
   margin: 0 0 16px;
-
-  font-size: 1.1rem;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 600;
 }
 
-
-/* ---------------------------------------------------------
-   Sidebar Lists
-   --------------------------------------------------------- */
-
-.sidebar-list {
-  list-style: none;
-
+.single-sidebar .sidebar-list {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
-.sidebar-list li {
+.single-sidebar .sidebar-list li {
   display: flex;
-
-  justify-content: space-between;
   align-items: baseline;
-
-  gap: 16px;
+  justify-content: space-between;
+  gap: 12px;
   padding: 6px 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
-.sidebar-list a {
-  color: inherit;
+.single-sidebar .sidebar-list li a {
+  min-width: 0;
+  color: var(--secondary);
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 
-.sidebar-list a:hover {
+.single-sidebar .sidebar-list li a:hover {
+  color: var(--primary);
   text-decoration: underline;
 }
 
-.sidebar-list span {
-  opacity: 0.55;
-  font-size: 0.9em;
+.single-sidebar .sidebar-list li span {
+  flex: 0 0 auto;
+  margin-left: auto;
+  color: var(--secondary);
+  font-size: 0.8rem;
+  font-weight: 400;
 }
 
 
 /* ---------------------------------------------------------
-   Responsive
+   Sidebar Search
    --------------------------------------------------------- */
 
-@media (max-width: 1000px) {
+.single-sidebar .sidebar-search {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
 
+.single-sidebar .sidebar-search input {
+  flex: 1 1 auto;
+  width: 0;
+  min-width: 0;
+}
+
+.single-sidebar .sidebar-search button {
+  flex: 0 0 auto;
+}
+
+
+/* ---------------------------------------------------------
+   Sidebar Tags
+   Preserve existing tag layout while preventing overflow.
+   --------------------------------------------------------- */
+
+.single-sidebar .sidebar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+
+.single-sidebar .sidebar-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+
+/* ---------------------------------------------------------
+   Tablet: Keep the 12-column layout
+   --------------------------------------------------------- */
+
+@media (min-width: 721px) and (max-width: 1199px) {
   .single-container {
-    grid-template-columns: 1fr;
+    width: calc(100% - 48px);
+    max-width: 1024px;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 0;
+  }
+
+  .single-content {
+    grid-column: 1 / span 7;
+  }
+
+  .single-sidebar {
+    grid-column: 9 / span 4;
+    position: sticky;
+    top: 24px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   Mobile: Single Column
+   --------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .single-container {
+    width: calc(100% - 32px);
+    max-width: 540px;
+    margin-inline: auto;
+
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 0;
+    row-gap: 40px;
   }
 
   .single-content,
   .single-sidebar {
     grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .single-sidebar {
     position: static;
-    margin-top: 48px;
+    top: auto;
+    margin-top: 0;
   }
 
-
-  /* Text & headings → full width */
-
-  .single-content .post-content p,
-  .single-content .post-content ul,
-  .single-content .post-content ol,
-  .single-content .post-content blockquote,
-  .single-content .post-content h1,
-  .single-content .post-content h2,
-  .single-content .post-content h3,
-  .single-content .post-content h4,
-  .single-content .post-content h5,
-  .single-content .post-content h6,
-  .single-content .post-content pre,
-  .single-content .post-content table {
+  .single-content .post-header,
+  .single-content .post-content,
+  .single-content .post-footer,
+  .single-content .post-meta,
+  .single-content .toc {
     width: 100%;
+    max-width: 100%;
   }
 
-
-  /* All images → full width */
-
-  .single-content .post-content figure.landscape,
-  .single-content .post-content figure.square,
-  .single-content .post-content figure.portrait {
-    width: 100%;
+  .single-content img,
+  .single-content video,
+  .single-content iframe,
+  .single-content figure {
+    max-width: 100%;
   }
-
-
-  /* All captions → full width */
-
-  .single-content .post-content figure figcaption,
-  .single-content .post-content figure.square figcaption,
-  .single-content .post-content figure.portrait figcaption {
-    width: 100%;
-  }
-
 }
 
 
 /* ---------------------------------------------------------
-   Mobile
+   Small Mobile
    --------------------------------------------------------- */
 
 @media (max-width: 600px) {
-
   .single-container {
-    width: min(100% - 24px, 540px);
+    width: calc(100% - 24px);
+    max-width: 540px;
+    row-gap: 32px;
   }
-
 }

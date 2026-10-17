@@ -1,15 +1,37 @@
 /* =========================================================
    Global Layout
-   ---------------------------------------------------------
-   全站统一布局基础：
+   全站统一响应式宽度体系
 
-   - 页面主要内容最大宽度：1200px
-   - Header 全宽
-   - Header 内部 nav 内容宽度：1200px
-   - Homepage / Single / Gallery / POTD / Footer
-     使用统一 1200px 内容基准
-   - Single 页面使用独立的 12-column Grid
+   Desktop: max 1024px, viewport - 48px
+   Tablet:  max 720px,  viewport - 32px
+   Mobile:  max 540px,  viewport - 24px
+
+   Header、首页内容、POTD、Single 使用相同的外层宽度规则。
    ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Responsive Container Variables
+   --------------------------------------------------------- */
+
+:root {
+  --site-content-max: 1024px;
+  --site-page-gutter: 24px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --site-content-max: 720px;
+    --site-page-gutter: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --site-content-max: 540px;
+    --site-page-gutter: 12px;
+  }
+}
 
 
 /* ---------------------------------------------------------
@@ -27,237 +49,330 @@
    Global Container
    --------------------------------------------------------- */
 
-   .container-1200 {
-     width: 1200px;
-     max-width: 1200px;
-
-     margin-inline: auto;
-   }
-
-
-/* ---------------------------------------------------------
-   Legacy 1440 Container
-   ---------------------------------------------------------
-
-   原先网站使用 1440px 内容宽度。
-
-   目前全站已经统一为 1200px。
-   暂时保留这个 class，避免旧模板立即失效。
-   --------------------------------------------------------- */
-
-.container-1440 {
-  width: min(1200px, calc(100% - 48px));
-
+.container-1200,
+.container-1440,
+.single-container {
+  width: min(
+    var(--site-content-max),
+    calc(100% - 2 * var(--site-page-gutter))
+  );
+  max-width: var(--site-content-max);
   margin-inline: auto;
+  min-width: 0;
 }
 
 
 /* ---------------------------------------------------------
-   12-column Grid
+   Homepage Outer Wrappers
+   --------------------------------------------------------- */
+
+.home-page,
+.home-main {
+  width: 100%;
+  min-width: 0;
+}
+
+
+/* ---------------------------------------------------------
+   Homepage Grid and Photo of the Day
+   直接使用全站统一容器宽度，不再重复定义宽度公式
+   --------------------------------------------------------- */
+
+.home-main > .container-1200.home-grid,
+.home-main > .home-potd {
+  width: min(
+    var(--site-content-max),
+    calc(100% - 2 * var(--site-page-gutter))
+  );
+  max-width: var(--site-content-max);
+  margin-inline: auto;
+  min-width: 0;
+}
+
+
+/* ---------------------------------------------------------
+   Homepage 12-column Grid
    --------------------------------------------------------- */
 
 .home-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(12, minmax(0, 1fr));
-
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: 32px;
 }
 
 
-/* ---------------------------------------------------------
-   Homepage
-   --------------------------------------------------------- */
-
-.home-page {
-  width: 100%;
-}
-
-
-/* =========================================================
-   Header
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   Header
-   ---------------------------------------------------------
-
-   Header 本身全宽。
-
-   内部 nav 使用统一的 1200px 内容宽度。
-   --------------------------------------------------------- */
-
-   .header {
-     width: 1200px;
-     max-width: 1200px;
-
-     margin: 0 auto;
-     padding: 0;
-
-     border: 0;
-
-     background: transparent !important;
-
-     color: var(--primary);
-   }
-
-
-/* ---------------------------------------------------------
-   Header Navigation
-   --------------------------------------------------------- */
-
-   .header .nav {
-     width: 100%;
-     max-width: 1200px;
-
-     height: 112px;
-
-     margin: 0;
-     padding: 0;
-
-     display: flex;
-
-     align-items: center;
-   }
-
-
-/* ---------------------------------------------------------
-   Header Logo
-   --------------------------------------------------------- */
-
-.header .logo {
-  margin-left: 0;
-
-  color: var(--primary);
-}
-
-.header .logo a {
-  color: var(--primary);
-
-  text-decoration: none;
-}
-
-
-/* ---------------------------------------------------------
-   Header Menu
-   --------------------------------------------------------- */
-
-.header #menu {
-  margin-right: 0;
-  margin-left: auto;
-}
-
-.header #menu a {
-  color: var(--primary);
-
-  text-decoration: none;
-}
-
-
-/* ---------------------------------------------------------
-   Header Theme Toggle
-   --------------------------------------------------------- */
-
-.header #theme-toggle {
-  color: var(--primary);
-}
-
-.header #theme-toggle svg {
-  color: currentColor;
-}
-
-
 /* =========================================================
    Single Page
+   十二栏比例与内部断点继续由 single.css 管理
    ========================================================= */
-
-
-/* ---------------------------------------------------------
-   Single Page Container
-   ---------------------------------------------------------
-
-   Single 主体与 Header 内部 nav
-   使用完全相同的 1200px 横向基准。
-   --------------------------------------------------------- */
-
-   .single-container {
-     width: 100%;
-     max-width: 1200px;
-
-     margin-top: 0;
-     margin-right: auto;
-     margin-bottom: 0;
-     margin-left: auto;
-   }
-
-
-/* ---------------------------------------------------------
-   Single Page
-   --------------------------------------------------------- */
 
 .single-page {
   width: 100%;
+  min-width: 0;
 }
 
 
 /* =========================================================
-   Responsive Layout
+   Unified Site Header
+   与正文容器共享同一套响应式宽度变量
    ========================================================= */
 
-@media (max-width: 900px) {
+html body header.site-header {
+  display: block;
+  box-sizing: border-box;
 
-  .container-1200,
-  .container-1440,
-  .single-container {
-    width: min(100% - 32px, 720px);
-  }
+  width: min(
+    var(--site-content-max),
+    calc(100% - 2 * var(--site-page-gutter))
+  ) !important;
+  max-width: var(--site-content-max) !important;
+  min-width: 0;
 
+  margin-inline: auto !important;
+  padding: 0 !important;
 
-  .header {
-    width: 100%;
-    max-width: none;
-  }
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--primary);
+}
 
+html body header.site-header nav.site-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
 
-  .header .nav {
-    width: min(100% - 32px, 720px);
-    max-width: 720px;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0;
+  min-height: 80px;
 
-    height: 80px;
-  }
-
-
-  .home-grid {
-    grid-template-columns: 1fr;
-
-    row-gap: 40px;
-  }
-
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: normal;
 }
 
 
+/* ---------------------------------------------------------
+   Brand
+   --------------------------------------------------------- */
+
+html body header.site-header .site-brand {
+  display: flex;
+  flex: 0 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+html body header.site-header .site-brand-link {
+  display: flex !important;
+  align-items: baseline;
+  gap: 12px;
+
+  min-width: 0;
+  white-space: nowrap;
+
+  color: var(--primary);
+  text-decoration: none;
+}
+
+html body header.site-header .site-brand-name {
+  flex: 0 0 auto;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+html body header.site-header .site-brand-tagline {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+/* ---------------------------------------------------------
+   Header Actions
+   --------------------------------------------------------- */
+
+html body header.site-header .site-nav-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 12px;
+
+  min-width: 0;
+  margin-left: auto;
+}
+
+html body header.site-header .site-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+html body header.site-header .site-theme-toggle svg {
+  color: currentColor;
+}
+
+html body header.site-header .site-language-switch {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+html body header.site-header .site-language-switch a {
+  color: var(--primary);
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   Hamburger Menu
+   ========================================================= */
+
+html body header.site-header .site-menu-toggle {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex: 0 0 36px;
+  gap: 5px;
+
+  width: 36px;
+  height: 36px;
+  margin: 0;
+  padding: 7px;
+
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+html body header.site-header .site-menu-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: currentColor;
+}
+
+html body header.site-header .site-menu {
+  display: none !important;
+  position: absolute;
+  z-index: 1000;
+  top: calc(100% - 1px);
+  right: 0;
+
+  min-width: 140px;
+  margin: 0;
+  padding: 12px 16px;
+
+  flex-direction: column;
+  align-items: stretch;
+  list-style: none;
+
+  background: var(--entry);
+  border: 1px solid var(--tertiary);
+}
+
+html body header.site-header .site-menu.is-open {
+  display: flex !important;
+}
+
+html body header.site-header .site-menu li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+html body header.site-header .site-menu a {
+  display: block;
+  padding: 6px 0;
+
+  color: var(--primary);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   Header Responsive Internal Layout
+   宽度由全站变量统一控制；这里只调整内部元素
+   ========================================================= */
+
+@media (max-width: 900px) {
+  html body header.site-header .site-brand-link {
+    gap: 8px;
+  }
+
+  html body header.site-header .site-brand-name {
+    font-size: 22px;
+  }
+
+  html body header.site-header .site-brand-tagline {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 700px) {
+  html body header.site-header nav.site-nav {
+    width: 100% !important;
+    min-width: 0;
+  }
+
+  html body header.site-header .site-brand {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  html body header.site-header .site-brand-link {
+    min-width: 0;
+    gap: 6px;
+  }
+
+  html body header.site-header .site-brand-tagline {
+    display: none;
+  }
+
+  html body header.site-header .site-nav-actions {
+    flex: 0 0 auto;
+    gap: 6px;
+    margin-left: 8px;
+  }
+}
+
 @media (max-width: 600px) {
-
-  .container-1200,
-  .container-1440,
-  .single-container {
-    width: min(100% - 24px, 540px);
+  html body header.site-header .site-brand-name {
+    font-size: 20px;
   }
 
-
-  .header {
-    width: 100%;
-    max-width: none;
+  html body header.site-header .site-nav-actions {
+    gap: 6px;
   }
+}
 
 
-  .header .nav {
-    width: min(100% - 24px, 540px);
-    max-width: 540px;
+/* =========================================================
+   Tablet Homepage Layout
+   ========================================================= */
 
-    height: 72px;
+@media (max-width: 900px) {
+  .home-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
   }
-
 }

@@ -13,7 +13,7 @@
 
       {{- $pages := .RegularPages }}
       {{- $pages = $pages.ByDate.Reverse }}
-      {{- $paginator := .Paginate $pages }}
+      {{- $paginator := .Paginate $pages 10 }}
 
       <div class="archive-grid">
 

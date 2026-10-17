@@ -1,0 +1,140 @@
+
+<header class="header site-header">
+  <nav class="nav site-nav" aria-label="主导航">
+    <div class="logo site-brand">
+      <a href="{{ "/" | relLangURL }}" class="site-brand-link">
+        <span class="site-brand-name">gem-io</span>
+        <span class="site-brand-tagline">Beyond pixels lies truth</span>
+      </a>
+    </div>
+
+    <div class="site-nav-actions">
+      {{- if not site.Params.disableThemeToggle }}
+      <button
+        id="theme-toggle"
+        class="site-theme-toggle"
+        accesskey="t"
+        title="切换明暗主题 (Alt + T)"
+        aria-label="切换明暗主题"
+        type="button">
+        <svg id="moon" xmlns="http://www.w3.org/2000/svg"
+          width="24" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg id="sun" xmlns="http://www.w3.org/2000/svg"
+          width="24" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+      {{- end }}
+
+      {{- $lang := .Lang }}
+      {{- with site.Home.Translations }}
+      <div class="site-language-switch">
+        {{- range . }}
+        {{- if ne $lang .Lang }}
+        <a href="{{ .RelPermalink }}"
+          lang="{{ .Lang }}"
+          aria-label="{{ .Language.LanguageName | default (.Lang | title) }}">
+          {{- .Language.LanguageName | default (.Lang | title) -}}
+        </a>
+        {{- end }}
+        {{- end }}
+      </div>
+      {{- end }}
+
+      <button
+        class="site-menu-toggle"
+        type="button"
+        aria-label="打开导航菜单"
+        aria-controls="site-menu"
+        aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul id="site-menu" class="site-menu">
+        <li>
+          <a href="{{ "/posts/" | relLangURL }}">文字日誌</a>
+        </li>
+        <li>
+          <a href="{{ "/gallery/" | relLangURL }}">圖片日誌</a>
+        </li>
+        <li>
+          <a href="{{ "/about/" | relLangURL }}">關於小站</a>
+        </li>
+        <li>
+        <a href="{{ "/index.xml" | relLangURL }}">RSS訂閱</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+<script>
+(() => {
+  const initSiteMenu = () => {
+    const headers = document.querySelectorAll(".site-header");
+
+    headers.forEach((header) => {
+      const toggle = header.querySelector(".site-menu-toggle");
+      const menu = header.querySelector(".site-menu");
+
+      if (!toggle || !menu || toggle.dataset.menuReady === "true") {
+        return;
+      }
+
+      toggle.dataset.menuReady = "true";
+
+      const closeMenu = () => {
+        menu.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "打开导航菜单");
+      };
+
+      toggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+
+        const isOpen = menu.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", String(isOpen));
+        toggle.setAttribute(
+          "aria-label",
+          isOpen ? "关闭导航菜单" : "打开导航菜单"
+        );
+      });
+
+      menu.addEventListener("click", (event) => {
+        if (event.target.closest("a")) closeMenu();
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!header.contains(event.target)) closeMenu();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMenu();
+      });
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSiteMenu);
+  } else {
+    initSiteMenu();
+  }
+})();
+</script>

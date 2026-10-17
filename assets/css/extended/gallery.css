@@ -108,8 +108,8 @@
 }
 
 .gallery-main .container-1200 {
-  width: 100%;
-  max-width: 1200px;
+  width: min(1024px, calc(100% - 48px));
+  max-width: 1024px;
   margin-inline: auto;
 }
 
