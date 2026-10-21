@@ -18,8 +18,11 @@
 {{- end }}
 {{- end }}
 
+
 {{- with ($scratch.Get "meta") }}
-{{- range . }}
-<div>{{ . | safeHTML }}</div>
-{{- end }}
+<div class="post-meta-items">
+  {{- range . }}
+  <span class="post-meta-item">{{ . | safeHTML }}</span>
+  {{- end }}
+</div>
 {{- end -}}

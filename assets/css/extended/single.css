@@ -301,3 +301,20 @@
     row-gap: 32px;
   }
 }
+
+
+/* ---------------------------------------------------------
+   Single Page Metadata
+   --------------------------------------------------------- */
+
+.single-content .post-meta-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.75em;
+  row-gap: 0.25em;
+}
+
+.single-content .post-meta-item {
+  display: inline;
+}
