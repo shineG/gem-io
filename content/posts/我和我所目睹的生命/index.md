@@ -11,7 +11,7 @@ cover:
 homepage:
   - position: "tag-section"
     section: "文學藝術"
-    priority: 1
+    priority: 2
     featured: false
 comments: true
 showToc: false

@@ -10,8 +10,9 @@ cover:
     alt: "築地本願寺之hide corner"
 homepage:
   - position: "tag-section"
-    priority: 2
-    section: "東京"
+    section: "東京私旅日記"
+    priority: 1
+    featured: false
 comments: true
 showToc: false
 ---

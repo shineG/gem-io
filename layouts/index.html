@@ -19,7 +19,7 @@
 
       <section class="home-recent">
 
-        <h2>最近动态</h2>
+        <h2>最新動態</h2>
 
         {{- $recentPosts := where site.RegularPages "Section" "posts" }}
         {{- $recentPosts = $recentPosts.ByDate.Reverse }}
@@ -75,7 +75,7 @@
         {{- end }}
 
         <div class="recent-more">
-          <a href="/posts/">
+          <a href="https://gem-io.com/posts/">
             查看更多
           </a>
         </div>
@@ -165,6 +165,7 @@
         {{- end }}
 
 
+
         <!-- =============================================
              Secondary Cards
              priority 0 → 左
@@ -175,116 +176,53 @@
         {{- $secondary1 := false }}
 
         {{- range site.RegularPages }}
-
           {{- $page := . }}
-
           {{- range $page.Params.homepage }}
-
-            {{- if and
-              (eq .position "secondary")
-              (eq .priority 0)
-            }}
-
+            {{- if and (eq .position "secondary") (eq .priority 0) }}
               {{- $secondary0 = $page }}
-
             {{- end }}
-
-
-            {{- if and
-              (eq .position "secondary")
-              (eq .priority 1)
-            }}
-
+            {{- if and (eq .position "secondary") (eq .priority 1) }}
               {{- $secondary1 = $page }}
-
             {{- end }}
-
           {{- end }}
-
         {{- end }}
 
+        {{- $secondaryPages := slice $secondary0 $secondary1 }}
 
         <div class="home-secondary-grid">
+          {{- range $secondaryPages }}
+            {{- with . }}
+              {{- $page := . }}
 
-
-          <!-- =========================================
-               Secondary 0
-               ========================================= -->
-
-          {{- with $secondary0 }}
-
-            {{- $page := . }}
-
-            <article class="secondary-card">
-
-              <a href="{{ $page.RelPermalink }}">
-
-                {{- with $page.Params.cover.image }}
-                  {{- $coverName := . }}
-
-                  {{- with $page.Resources.ByType "image" }}
-                    {{- with .GetMatch (printf "*%s*" $coverName) }}
-
-                      <img
-                        class="secondary-image ratio-5-4"
-                        src="{{ .RelPermalink }}"
-                        alt="{{ $page.Params.cover.alt | default $page.Title }}">
-
+              <article class="secondary-card">
+                <a class="secondary-card-link" href="{{ $page.RelPermalink }}">
+                  <div class="secondary-image-wrap">
+                    {{- with $page.Params.cover.image }}
+                      {{- $coverName := . }}
+                      {{- with $page.Resources.ByType "image" }}
+                        {{- with .GetMatch (printf "*%s*" $coverName) }}
+                          <img
+                            class="secondary-image"
+                            src="{{ .RelPermalink }}"
+                            alt="{{ $page.Params.cover.alt | default $page.Title }}">
+                        {{- end }}
+                      {{- end }}
                     {{- end }}
-                  {{- end }}
 
-                {{- end }}
+                    <div class="secondary-overlay">
+                      {{- with $page.Params.tags }}
+                        {{- with index . 0 }}
+                          <div class="secondary-tag">{{ . }}</div>
+                        {{- end }}
+                      {{- end }}
 
-                <h3>
-                  {{ $page.Title }}
-                </h3>
-
-              </a>
-
-            </article>
-
+                      <h3 class="secondary-title">{{ $page.Title }}</h3>
+                    </div>
+                  </div>
+                </a>
+              </article>
+            {{- end }}
           {{- end }}
-
-
-          <!-- =========================================
-               Secondary 1
-               ========================================= -->
-
-          {{- with $secondary1 }}
-
-            {{- $page := . }}
-
-            <article class="secondary-card">
-
-              <a href="{{ $page.RelPermalink }}">
-
-                {{- with $page.Params.cover.image }}
-                  {{- $coverName := . }}
-
-                  {{- with $page.Resources.ByType "image" }}
-                    {{- with .GetMatch (printf "*%s*" $coverName) }}
-
-                      <img
-                        class="secondary-image ratio-5-4"
-                        src="{{ .RelPermalink }}"
-                        alt="{{ $page.Params.cover.alt | default $page.Title }}">
-
-                    {{- end }}
-                  {{- end }}
-
-                {{- end }}
-
-                <h3>
-                  {{ $page.Title }}
-                </h3>
-
-              </a>
-
-            </article>
-
-          {{- end }}
-
-
         </div>
 
       </section>
@@ -369,81 +307,102 @@
 
     <!-- =================================================
          Selected Tag Sections
+         栏目名称、排序、链接和数量由 hugo.toml 控制
          ================================================= -->
 
     <div class="container-1200">
 
       <section class="home-tag-sections">
 
-        <h2>文学艺术</h2>
+        {{- range sort site.Params.homeTagSections "weight" }}
 
-        <div class="home-grid">
+        {{- $tagSection := . }}
+        {{- $tagPages := slice }}
 
-          {{- $tagPages := slice }}
+        {{- range site.RegularPages }}
 
-          {{- range site.RegularPages }}
+          {{- $page := . }}
 
-            {{- $page := . }}
+          {{- range $page.Params.homepage }}
 
-            {{- range $page.Params.homepage }}
+            {{- if and
+              (eq .position "tag-section")
+              (eq .section $tagSection.section)
+            }}
 
-              {{- if and
-                (eq .position "tag-section")
-                (eq .section "文學藝術")
-              }}
+              {{- $priority := 999 }}
 
-                {{- $tagPages = $tagPages | append $page }}
-
+              {{- if isset . "priority" }}
+                {{- $priority = int .priority }}
               {{- end }}
+
+              {{- $tagPages = $tagPages | append (dict
+                "priority" $priority
+                "page" $page
+              ) }}
 
             {{- end }}
 
           {{- end }}
 
+        {{- end }}
 
-          {{- range $tagPages }}
+          <section class="home-tag-section">
 
-            {{- $page := . }}
+            <h2 class="home-tag-section-title">
+              <a href="{{ $tagSection.url }}">
+                {{ $tagSection.name }}
+              </a>
+            </h2>
 
-            <article class="tag-card">
+            <div class="home-grid">
 
-              <a href="{{ $page.RelPermalink }}">
+                {{- range first (default 4 $tagSection.limit) (sort $tagPages "priority" "asc") }}
 
-                {{- with $page.Params.cover.image }}
-                  {{- $coverName := . }}
+                  {{- $page := .page }}
 
-                  {{- with $page.Resources.ByType "image" }}
-                    {{- with .GetMatch (printf "*%s*" $coverName) }}
+                <article class="tag-card">
 
-                      <img
-                        class="ratio-4-3"
-                        src="{{ .RelPermalink }}"
-                        alt="{{ $page.Params.cover.alt | default $page.Title }}">
+                  <a href="{{ $page.RelPermalink }}">
+
+                    {{- with $page.Params.cover.image }}
+                      {{- $coverName := . }}
+
+                      {{- with $page.Resources.ByType "image" }}
+                        {{- with .GetMatch (printf "*%s*" $coverName) }}
+
+                          <img
+                            class="ratio-4-3"
+                            src="{{ .RelPermalink }}"
+                            alt="{{ $page.Params.cover.alt | default $page.Title }}">
+
+                        {{- end }}
+                      {{- end }}
 
                     {{- end }}
-                  {{- end }}
 
-                {{- end }}
+                    <h3>{{ $page.Title }}</h3>
 
-                <h3>
-                  {{ $page.Title }}
-                </h3>
+                    {{- with $page.Description }}
+                      <p>{{ . }}</p>
+                    {{- end }}
 
-                {{- with $page.Description }}
-                  <p>{{ . }}</p>
-                {{- end }}
+                  </a>
 
-              </a>
+                </article>
 
-            </article>
+              {{- end }}
 
-          {{- end }}
+            </div>
 
-        </div>
+          </section>
+
+        {{- end }}
 
       </section>
 
     </div>
+
 
   </main>
 

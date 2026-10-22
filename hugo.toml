@@ -127,3 +127,22 @@ enableRobotsTXT = true
 
 [params.assets]
   favicon = "/favicon.ico"
+
+  # =====================================================
+  # Homepage: Selected Tag Sections
+  # weight 越小，栏目越靠前
+  # =====================================================
+
+  [[params.homeTagSections]]
+  name = "文學藝術"
+  section = "文學藝術"
+  url = "/tags/文學藝術/"
+  weight = 1
+  limit = 4
+
+  [[params.homeTagSections]]
+  name = "東京私旅日記"
+  section = "東京私旅日記"
+  url = "/tags/東京/"
+  weight = 0
+  limit = 4

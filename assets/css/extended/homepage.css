@@ -488,3 +488,138 @@
     font-size: 0.7rem;
   }
 }
+
+
+/* =========================================================
+   Homepage Updates
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Secondary Cards: 4:3 image with text overlay
+   --------------------------------------------------------- */
+
+.secondary-card {
+  min-width: 0;
+}
+
+.secondary-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.secondary-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+}
+
+.secondary-card .secondary-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.secondary-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 40px 20px 20px;
+  color: #fff;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.62) 32%,
+    rgba(0, 0, 0, 0.22) 62%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.secondary-tag {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.secondary-card .secondary-title {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ---------------------------------------------------------
+   Recent Updates: underlined "View More" link
+   --------------------------------------------------------- */
+
+.recent-more a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* ---------------------------------------------------------
+   Tag Sections: reusable section headings
+   --------------------------------------------------------- */
+
+.home-tag-section + .home-tag-section {
+  margin-top: 56px;
+}
+
+.home-tag-section-title {
+  margin: 0 0 32px;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.home-tag-section-title a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.home-tag-section-title a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ---------------------------------------------------------
+   Responsive adjustments
+   --------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .secondary-overlay {
+    padding: 32px 16px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .secondary-overlay {
+    padding: 40px 20px 20px;
+  }
+
+  .secondary-tag {
+    font-size: 0.65rem;
+    margin-bottom: 5px;
+  }
+
+  .home-tag-section + .home-tag-section {
+    margin-top: 44px;
+  }
+
+  .home-tag-section-title {
+    margin-bottom: 24px;
+    font-size: 1.25rem;
+  }
+}
