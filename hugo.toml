@@ -141,8 +141,8 @@ enableRobotsTXT = true
   limit = 4
 
   [[params.homeTagSections]]
-  name = "東京私旅日記"
-  section = "東京私旅日記"
+  name = "漫行in東京"
+  section = "漫行in東京"
   url = "/tags/東京/"
   weight = 0
   limit = 4
