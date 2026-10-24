@@ -669,3 +669,23 @@
     row-gap: 20px;
   }
 }
+
+/* =========================================================
+   Legacy browser compatibility
+   Firefox 78 / OS X Mavericks
+   Photo of the Day: preserve container height without
+   relying on aspect-ratio
+   ========================================================= */
+
+.home-potd .potd-container {
+  height: 0;
+  padding-bottom: 62.5%;
+  box-sizing: content-box;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 600px) {
+  .home-potd .potd-container {
+    padding-bottom: 75%;
+  }
+}
