@@ -85,4 +85,4 @@ Nikon Museum無需預約，可以免費進入參觀。不過如果需要人員�
 ![Nikon Museum官方紀念品商店](周邊銷售.jpg "周邊銷售")
 
 
-![相信Nikon電影機設備，將續寫它的百年傳奇](RED.JPG "RED電影機設備")
+![期待Nikon電影機設備續寫它的百年傳奇](RED.JPG "RED電影機設備")
