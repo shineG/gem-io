@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const link = document.createElement("a");
       link.className = "archive-card-link";
 
-      // 仅允许站内链接
+      // 解析站内相对路径，并拒绝显式指向其他主机的 URL
       try {
         const url = new URL(item.permalink, window.location.origin);
 

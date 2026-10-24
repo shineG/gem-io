@@ -421,10 +421,11 @@
 }
 
 @media (max-width: 600px) {
-  .home-secondary-grid {
-    grid-template-columns: 1fr;
-    row-gap: 32px;
-  }
+    .home-secondary-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 12px;
+      row-gap: 12px;
+    }
 
   .tag-card {
     grid-column: 1 / -1;
@@ -621,5 +622,50 @@
   .home-tag-section-title {
     margin-bottom: 24px;
     font-size: 1.25rem;
+  }
+}
+
+/* =========================================================
+   Mobile: Secondary cards
+   移动端副焦点每行两张卡片
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .home-secondary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 12px;
+    row-gap: 12px;
+  }
+}
+
+/* =========================================================
+   Tag Sections: responsive card grid
+   桌面端每行 4 张，平板及手机端每行 2 张
+   ========================================================= */
+
+.home-tag-section .home-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 32px;
+}
+
+.home-tag-section .tag-card {
+  grid-column: auto;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .home-tag-section .home-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-tag-section .home-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 12px;
+    row-gap: 20px;
   }
 }
