@@ -17,7 +17,7 @@ comments: true
 showToc: false
 ---
 
-![](Gundam_Seed_TV.JPG "")
+![](Gundam_Seed_TV.jpg "")
 
 今日颱風，二刷Gundam Seed，還是好看！
 
