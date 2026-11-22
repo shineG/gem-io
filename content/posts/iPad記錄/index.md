@@ -6,7 +6,7 @@ description: 爸爸去世1200天多天後，我打開了他用過的iPad
 categories: ["日誌"]
 tags: ["生活紀錄"]
 cover:
-    image: "black.png"
+    image: "black.jpg"
     alt: "none"
 homepage:
   - position: 
